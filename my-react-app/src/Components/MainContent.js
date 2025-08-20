@@ -4,22 +4,17 @@ import BlogPost from './BlogPost';
 import GridLayout from './GridLayout';
 
 const MainContent = ({ currentPage }) => {
-  const renderContent = () => {
-    switch (currentPage) {
-      case 'massively':
-        return <LandingPage />;
-      case 'generic':
-        return <BlogPost />;
-      case 'elements':
-        return <GridLayout />;
-      default:
-        return <LandingPage />;
-    }
+  const pages = {
+    massively: LandingPage,
+    generic: BlogPost,
+    elements: GridLayout
   };
+
+  const CurrentPageComponent = pages[currentPage] || LandingPage;
 
   return (
     <div id="main" className="main">
-      {renderContent()}
+      <CurrentPageComponent />
     </div>
   );
 };

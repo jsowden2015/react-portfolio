@@ -1,26 +1,52 @@
 import React from 'react';
 
+const GridItem = ({ date, title, color, imageDescription, description }) => (
+  <div className="grid-item">
+    <div className="post-date">{date}</div>
+    <h3 className="post-title" style={{ color }}>
+      {title}
+    </h3>
+    <div className="post-image">
+      <div className="image-placeholder">
+        <span>{imageDescription}</span>
+      </div>
+    </div>
+    <p className="post-description">
+      {description}
+    </p>
+    <button className="full-story-btn">FULL STORY</button>
+  </div>
+);
+
 const GridLayout = () => {
   const posts = [
     {
       date: 'April 24, 2017',
       title: 'SED MAGNA IPSUM FAUCIBUS',
-      color: 'white'
+      color: 'white',
+      imageDescription: 'Vintage Volkswagen Beetle',
+      description: 'Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.'
     },
     {
       date: 'April 22, 2017',
       title: 'PRIMIS EGET IMPERDIET LOREM',
-      color: 'white'
+      color: 'white',
+      imageDescription: 'Person in suit',
+      description: 'Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.'
     },
     {
       date: 'April 18, 2017',
       title: 'ANTE MATTIS INTERDUM DOLOR',
-      color: 'lightblue'
+      color: 'lightblue',
+      imageDescription: 'Vintage camera',
+      description: 'Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.'
     },
     {
       date: 'April 14, 2017',
       title: 'TEMPUS SED NULLA IMPERDIET',
-      color: 'white'
+      color: 'white',
+      imageDescription: 'Mountain formation',
+      description: 'Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.'
     }
   ];
 
@@ -28,24 +54,7 @@ const GridLayout = () => {
     <div className="grid-layout">
       <div className="grid-container">
         {posts.map((post, index) => (
-          <div key={index} className="grid-item">
-            <div className="post-date">{post.date}</div>
-            <h3 className="post-title" style={{ color: post.color }}>
-              {post.title}
-            </h3>
-            <div className="post-image">
-              <div className="image-placeholder">
-                {index === 0 && <span>Vintage Volkswagen Beetle</span>}
-                {index === 1 && <span>Person in suit</span>}
-                {index === 2 && <span>Vintage camera</span>}
-                {index === 3 && <span>Mountain formation</span>}
-              </div>
-            </div>
-            <p className="post-description">
-              Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.
-            </p>
-            <button className="full-story-btn">FULL STORY</button>
-          </div>
+          <GridItem key={index} {...post} />
         ))}
       </div>
     </div>

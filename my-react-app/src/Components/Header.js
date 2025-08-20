@@ -1,31 +1,52 @@
 import React from 'react';
 
+const NavigationLink = ({ isActive, onClick, children }) => (
+  <li className={isActive ? 'active' : ''}>
+    <a href="#" onClick={onClick}>{children}</a>
+  </li>
+);
+
+const SocialIcon = ({ icon, label, href = "#" }) => (
+  <li>
+    <a href={href} className={`icon brands ${icon}`}>
+      <span className="label">{label}</span>
+    </a>
+  </li>
+);
+
 const Header = ({ currentPage, setCurrentPage }) => {
+  const navigationItems = [
+    { key: 'massively', label: 'Portfolio' },
+    { key: 'generic', label: 'About Me' },
+    { key: 'elements', label: 'Projects' }
+  ];
+
+  const socialIcons = [
+    { icon: 'fa-twitter', label: 'Twitter', href: 'https://twitter.com/justinsowden' },
+    { icon: 'fa-linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/justin-sowden' },
+    { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/justinsowden' },
+    { icon: 'fa-envelope', label: 'Email', href: 'mailto:justin@example.com' }
+  ];
+
   return (
     <>
-      {/* Header */}
-      <header id="header">
-        <a href="#" className="logo">Massively</a>
-      </header>
-
       {/* Nav */}
       <nav id="nav">
         <ul className="links">
-          <li className={currentPage === 'massively' ? 'active' : ''}>
-            <a href="#" onClick={() => setCurrentPage('massively')}>This is Massively</a>
-          </li>
-          <li className={currentPage === 'generic' ? 'active' : ''}>
-            <a href="#" onClick={() => setCurrentPage('generic')}>Generic Page</a>
-          </li>
-          <li className={currentPage === 'elements' ? 'active' : ''}>
-            <a href="#" onClick={() => setCurrentPage('elements')}>Elements Reference</a>
-          </li>
+          {navigationItems.map(item => (
+            <NavigationLink
+              key={item.key}
+              isActive={currentPage === item.key}
+              onClick={() => setCurrentPage(item.key)}
+            >
+              {item.label}
+            </NavigationLink>
+          ))}
         </ul>
         <ul className="icons">
-          <li><a href="#" className="icon brands fa-twitter"><span className="label">Twitter</span></a></li>
-          <li><a href="#" className="icon brands fa-facebook-f"><span className="label">Facebook</span></a></li>
-          <li><a href="#" className="icon brands fa-instagram"><span className="label">Instagram</span></a></li>
-          <li><a href="#" className="icon brands fa-github"><span className="label">GitHub</span></a></li>
+          {socialIcons.map(icon => (
+            <SocialIcon key={icon.label} {...icon} />
+          ))}
         </ul>
       </nav>
     </>
