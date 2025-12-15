@@ -23,7 +23,16 @@ const ContactForm = ({ theme, animations }) => {
     setTimeout(() => {
       setIsSubmitting(false);
       setFormData({ name: '', email: '', message: '' });
-      alert('Thank you for your message! I\'ll get back to you soon.');
+      // Use a more accessible notification method
+      const notification = document.createElement('div');
+      notification.setAttribute('role', 'alert');
+      notification.setAttribute('aria-live', 'polite');
+      notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 1rem 2rem; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
+      notification.textContent = 'Thank you for your message! I\'ll get back to you soon.';
+      document.body.appendChild(notification);
+      setTimeout(() => {
+        notification.remove();
+      }, 5000);
     }, 2000);
   };
 
@@ -100,7 +109,14 @@ const ContactForm = ({ theme, animations }) => {
   };
 
   return (
-    <form method="post" action="#" style={styles.form} onSubmit={handleSubmit}>
+    <form 
+      method="post" 
+      action="#" 
+      style={styles.form} 
+      onSubmit={handleSubmit}
+      aria-label="Contact form"
+      noValidate
+    >
       <div className="fields" style={styles.fields}>
         <div className="field" style={styles.field}>
           <label htmlFor="name" style={styles.label}>Name</label>
@@ -112,6 +128,9 @@ const ContactForm = ({ theme, animations }) => {
             onChange={handleInputChange}
             style={styles.input}
             required
+            aria-required="true"
+            aria-label="Your name"
+            aria-invalid={false}
           />
         </div>
         <div className="field" style={styles.field}>
@@ -124,6 +143,9 @@ const ContactForm = ({ theme, animations }) => {
             onChange={handleInputChange}
             style={styles.input}
             required
+            aria-required="true"
+            aria-label="Your email address"
+            aria-invalid={false}
           />
         </div>
       </div>
@@ -137,18 +159,24 @@ const ContactForm = ({ theme, animations }) => {
           onChange={handleInputChange}
           style={styles.textarea}
           required
+          aria-required="true"
+          aria-label="Your message"
+          aria-invalid={false}
         ></textarea>
       </div>
-      <ul className="actions" style={styles.actions}>
+      <ul className="actions" style={styles.actions} role="list">
         <li>
-          <input 
-            type="submit" 
-            value={isSubmitting ? 'Sending...' : 'Send Message'}
+          <button 
+            type="submit"
             style={styles.submitButton}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             disabled={isSubmitting}
-          />
+            aria-label="Submit contact form"
+            aria-busy={isSubmitting}
+          >
+            {isSubmitting ? 'Sending...' : 'Send Message'}
+          </button>
         </li>
       </ul>
     </form>
@@ -188,7 +216,13 @@ const ContactInfo = ({ title, content, isLink = false, theme, animations, index 
       <h3 style={styles.title}>{title}</h3>
       {isLink ? (
         <p style={styles.content}>
-          <a href="#" style={styles.link}>{content}</a>
+          <a 
+            href={title === 'Phone' ? `tel:${content}` : title === 'Email' ? `mailto:${content}` : '#'} 
+            style={styles.link}
+            aria-label={`${title}: ${content}`}
+          >
+            {content}
+          </a>
         </p>
       ) : (
         <p style={styles.content}>{content}</p>
@@ -351,12 +385,12 @@ const Contact = ({ theme, animations }) => {
       </div>
       
       <div style={styles.container}>
-        <section style={styles.formSection}>
+        <section style={styles.formSection} aria-label="Contact form section">
           <h2 style={{ color: theme.text, marginBottom: '2rem' }}>Send Message</h2>
           <ContactForm theme={theme} animations={animations} />
         </section>
         
-        <section style={styles.infoSection}>
+        <section style={styles.infoSection} aria-label="Contact information section">
           <h2 style={{ color: theme.text, marginBottom: '2rem' }}>Contact Information</h2>
           {contactInfo.map((info, index) => (
             <ContactInfo 

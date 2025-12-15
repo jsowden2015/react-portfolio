@@ -41,7 +41,7 @@ export const ANIMATIONS = {
 
 // Navigation configuration
 export const NAVIGATION_ITEMS = [
-  { key: 'massively', label: 'Portfolio' },
+  { key: 'portfolio', label: 'Portfolio' },
   { key: 'generic', label: 'About Me' },
   { key: 'elements', label: 'Projects' },
   { key: 'contact', label: 'Contact' }
@@ -77,15 +77,15 @@ export const CONTACT_INFO = [
 export const PORTFOLIO_PROJECTS = [
   {
     date: 'Web Development',
-    title: 'React Portfolio\nWebsite',
-    image: '/images/pic02.jpg',
-    description: 'A modern, responsive portfolio built with React and featuring the Massively theme. Demonstrates clean code structure and modern web development practices.'
+    title: 'JustShare\nLanding Page',
+    image: '/images/just-share.jpg',
+    description: 'JustShare - Secure file sharing landing page built with React. Features modern design with secure file sharing, fast upload/download speeds, and real-time collaboration capabilities.'
   },
   {
     date: 'UI/UX Design',
-    title: 'Mobile App\nInterface',
-    image: '/images/pic03.jpg',
-    description: 'User-centered design approach for mobile applications. Focus on intuitive navigation and engaging user experiences.'
+    title: 'ParkPay\nMobile App',
+    image: '/images/parkpay-mobile-app.jpg',
+    description: 'ParkPay mobile application interface for paying parking tickets. Features intuitive step-by-step process, ticket and license plate search, and seamless payment flow.'
   },
   {
     date: 'Full Stack',
@@ -115,7 +115,7 @@ export const PORTFOLIO_PROJECTS = [
 
 // App configuration
 export const APP_CONFIG = {
-  defaultPage: 'massively',
+  defaultPage: 'portfolio',
   defaultTheme: 'light',
   loadingDuration: 2000,
   fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
