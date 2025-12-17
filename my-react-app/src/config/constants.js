@@ -43,7 +43,6 @@ export const ANIMATIONS = {
 export const NAVIGATION_ITEMS = [
   { key: 'portfolio', label: 'Portfolio' },
   { key: 'generic', label: 'About Me' },
-  { key: 'elements', label: 'Projects' },
   { key: 'contact', label: 'Contact' }
 ];
 
@@ -76,21 +75,21 @@ export const CONTACT_INFO = [
 export const PORTFOLIO_PROJECTS = [
   {
     date: 'Web Development',
-    title: 'JustShare\nLanding Page',
+    title: 'JustShare\nFile Sharing Platform',
     image: '/images/just-share.jpg',
-    description: 'JustShare - Secure file sharing landing page built with React. Features modern design with secure file sharing, fast upload/download speeds, and real-time collaboration capabilities.'
+    description: 'A modern file sharing application built with React, TypeScript, and Vite. Demonstrates growth engineering principles, monetization strategies, and full-stack development skills. Features include sign-up flow, trial conversion, dashboard with file management, storage tracking, and premium upsell flow.'
   },
   {
     date: 'UI/UX Design',
-    title: 'ParkPay\nMobile App',
+    title: 'ParkPay\nParking Payment App',
     image: '/images/parkpay-mobile-app.jpg',
-    description: 'ParkPay mobile application interface for paying parking tickets. Features intuitive step-by-step process, ticket and license plate search, and seamless payment flow.'
+    description: 'A comprehensive UX/UI design project for Google UX Certification. Multi-platform parking ticket payment application with iOS mobile app and responsive desktop web app. Features streamlined four-step process (lookup, review, payment, confirmation) with progress indicators, plus complete design system and design documentation.'
   },
   {
-    date: 'Full Stack',
-    title: 'E-commerce\nPlatform',
-    image: '/images/pic04.jpg',
-    description: 'Complete e-commerce solution with payment processing, inventory management, and responsive design.'
+    date: 'Frontend Development',
+    title: 'JustStream\nStreaming Dashboard',
+    image: '/images/just-stream.jpg',
+    description: 'A modern, full-featured streaming service dashboard built with React, TypeScript, and Redux Toolkit. Features infinite scrolling, lazy loading, video player integration, code splitting, error handling, and CI/CD pipeline setup.'
   },
   {
     date: 'Creative Design',
