@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Components/Header';
 import MainContent from './Components/MainContent';
 import ErrorBoundary from './Components/ErrorBoundary';
-import { APP_CONFIG, PAGE_KEYS, Z_INDEX } from './config/constants';
+import { APP_CONFIG, Z_INDEX } from './config/constants';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(APP_CONFIG.defaultPage);
