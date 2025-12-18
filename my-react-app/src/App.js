@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from './Components/Header';
 import MainContent from './Components/MainContent';
-import Footer from './Components/Footer';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('portfolio');
@@ -35,7 +34,6 @@ function App() {
       </a>
       <Header currentPage={currentPage} setCurrentPage={setCurrentPage} />
       <MainContent currentPage={currentPage} />
-      <Footer />
       
       {/* Copyright */}
       <div id="copyright">

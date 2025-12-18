@@ -1,4 +1,19 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
+
+// Helper function to show notifications
+const showNotification = (message, type = 'success') => {
+  const notification = document.createElement('div');
+  notification.setAttribute('role', 'alert');
+  notification.setAttribute('aria-live', 'polite');
+  const bgColor = type === 'success' ? '#4CAF50' : '#f44336';
+  notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${bgColor}; color: white; padding: 1rem 2rem; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-family: inherit;`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  setTimeout(() => {
+    notification.remove();
+  }, 5000);
+};
 
 const ContactForm = ({ theme, animations }) => {
   const [formData, setFormData] = useState({
@@ -9,6 +24,11 @@ const ContactForm = ({ theme, animations }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
+  // EmailJS configuration - these should be set as environment variables
+  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id';
+  const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'your_template_id';
+  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'your_public_key';
+
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -16,24 +36,40 @@ const ContactForm = ({ theme, animations }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
-    setTimeout(() => {
+
+    // Check if EmailJS is configured
+    if (SERVICE_ID === 'your_service_id' || TEMPLATE_ID === 'your_template_id' || PUBLIC_KEY === 'your_public_key') {
+      showNotification('Email service is not configured. Please set up EmailJS credentials.', 'error');
       setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // Initialize EmailJS with public key
+      emailjs.init(PUBLIC_KEY);
+
+      // Send email using EmailJS
+      // Variable names match your EmailJS template: {{name}}, {{email}}, {{message}}, {{title}}, {{time}}
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        title: 'Portfolio Contact Form',
+        time: new Date().toLocaleString()
+      });
+
+      // Success
+      showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
       setFormData({ name: '', email: '', message: '' });
-      // Use a more accessible notification method
-      const notification = document.createElement('div');
-      notification.setAttribute('role', 'alert');
-      notification.setAttribute('aria-live', 'polite');
-      notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 1rem 2rem; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
-      notification.textContent = 'Thank you for your message! I\'ll get back to you soon.';
-      document.body.appendChild(notification);
-      setTimeout(() => {
-        notification.remove();
-      }, 5000);
-    }, 2000);
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      showNotification('Sorry, there was an error sending your message. Please try again later.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const styles = {
@@ -90,7 +126,8 @@ const ContactForm = ({ theme, animations }) => {
       margin: 0,
       padding: 0,
       display: 'flex',
-      justifyContent: 'center'
+      justifyContent: 'flex-start',
+      width: '100%'
     },
     submitButton: {
       padding: '1rem 2rem',
@@ -99,12 +136,16 @@ const ContactForm = ({ theme, animations }) => {
       border: 'none',
       borderRadius: '12px',
       fontSize: '1rem',
-      fontWeight: 600,
+      fontWeight: 700,
+      letterSpacing: '0.02em',
       cursor: isSubmitting ? 'not-allowed' : 'pointer',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
       boxShadow: isHovered ? theme.shadow : '0 4px 15px rgba(0, 0, 0, 0.2)',
-      opacity: isSubmitting ? 0.7 : 1
+      opacity: isSubmitting ? 0.7 : 1,
+      minWidth: '150px',
+      textAlign: 'center',
+      textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
     }
   };
 
@@ -200,14 +241,17 @@ const ContactInfo = ({ title, content, isLink = false, theme, animations, index 
     },
     content: {
       color: theme.text,
-      opacity: 0.8,
+      opacity: 0.9,
       lineHeight: 1.6,
-      margin: 0
+      margin: 0,
+      fontSize: '1rem'
     },
     link: {
       color: theme.primary,
       textDecoration: 'none',
-      transition: 'color 0.3s ease'
+      transition: 'color 0.3s ease',
+      fontWeight: 600,
+      opacity: 1
     }
   };
 
