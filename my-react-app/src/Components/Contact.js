@@ -23,6 +23,7 @@ const ContactForm = ({ theme, animations }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [focusedField, setFocusedField] = useState(null);
 
   // EmailJS configuration - these should be set as environment variables
   const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id';
@@ -97,39 +98,60 @@ const ContactForm = ({ theme, animations }) => {
       textTransform: 'uppercase',
       letterSpacing: '0.05em'
     },
-    input: {
+    getInputStyle: (fieldName) => ({
       padding: '0.75rem 1rem',
-      border: `1px solid ${theme.border}`,
+      border: focusedField === fieldName
+        ? `2px solid ${theme.primary}` 
+        : `2px solid rgba(102, 126, 234, 0.4)`,
       borderRadius: '8px',
-      background: 'rgba(255, 255, 255, 0.1)',
+      background: 'rgba(255, 255, 255, 0.95)',
       color: theme.text,
       fontSize: '1rem',
       transition: 'all 0.3s ease',
       backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)'
-    },
+      WebkitBackdropFilter: 'blur(10px)',
+      outline: 'none',
+      boxShadow: focusedField === fieldName
+        ? `0 0 0 3px rgba(102, 126, 234, 0.1)` 
+        : 'none'
+    }),
     textarea: {
       padding: '0.75rem 1rem',
-      border: `1px solid ${theme.border}`,
+      border: focusedField === 'message' 
+        ? `2px solid ${theme.primary}` 
+        : `2px solid rgba(102, 126, 234, 0.4)`,
       borderRadius: '8px',
-      background: 'rgba(255, 255, 255, 0.1)',
+      background: 'rgba(255, 255, 255, 0.95)',
       color: theme.text,
       fontSize: '1rem',
       resize: 'vertical',
       minHeight: '120px',
       transition: 'all 0.3s ease',
       backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)'
+      WebkitBackdropFilter: 'blur(10px)',
+      outline: 'none',
+      boxShadow: focusedField === 'message' 
+        ? `0 0 0 3px rgba(102, 126, 234, 0.1)` 
+        : 'none'
     },
     actions: {
       listStyle: 'none',
       margin: 0,
       padding: 0,
       display: 'flex',
-      justifyContent: 'flex-start',
+      justifyContent: 'center',
+      alignItems: 'center',
       width: '100%'
     },
+    actionItem: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
     submitButton: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       padding: '1rem 2rem',
       background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
       color: theme.textLight,
@@ -167,7 +189,9 @@ const ContactForm = ({ theme, animations }) => {
             id="name" 
             value={formData.name}
             onChange={handleInputChange}
-            style={styles.input}
+            onFocus={() => setFocusedField('name')}
+            onBlur={() => setFocusedField(null)}
+            style={styles.getInputStyle('name')}
             required
             aria-required="true"
             aria-label="Your name"
@@ -182,7 +206,9 @@ const ContactForm = ({ theme, animations }) => {
             id="email" 
             value={formData.email}
             onChange={handleInputChange}
-            style={styles.input}
+            onFocus={() => setFocusedField('email')}
+            onBlur={() => setFocusedField(null)}
+            style={styles.getInputStyle('email')}
             required
             aria-required="true"
             aria-label="Your email address"
@@ -198,6 +224,8 @@ const ContactForm = ({ theme, animations }) => {
           rows="6"
           value={formData.message}
           onChange={handleInputChange}
+          onFocus={() => setFocusedField('message')}
+          onBlur={() => setFocusedField(null)}
           style={styles.textarea}
           required
           aria-required="true"
@@ -206,7 +234,7 @@ const ContactForm = ({ theme, animations }) => {
         ></textarea>
       </div>
       <ul className="actions" style={styles.actions} role="list">
-        <li>
+        <li style={styles.actionItem}>
           <button 
             type="submit"
             style={styles.submitButton}
@@ -280,8 +308,7 @@ const SocialLinks = ({ theme, animations }) => {
 
   const socialIcons = [
     { icon: 'fa-linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/justin-sowden-361005184/' },
-    { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/jsowden2015' },
-    { icon: 'fa-envelope', label: 'Email', href: 'mailto:justin@example.com' }
+    { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/jsowden2015' }
   ];
 
   const styles = {
@@ -350,13 +377,8 @@ const Contact = ({ theme, animations }) => {
   const contactInfo = [
     {
       title: 'Address',
-      content: '1234 Somewhere Road #87257\nNashville, TN 00000-0000',
+      content: 'Boston, MA (Remote)',
       isAlt: true
-    },
-    {
-      title: 'Phone',
-      content: '(000) 000-0000',
-      isLink: true
     },
     {
       title: 'Email',

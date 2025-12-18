@@ -1,7 +1,7 @@
 import React from 'react';
 import { NAVIGATION_ITEMS } from '../config/constants';
 
-const Header = ({ currentPage, setCurrentPage }) => {
+const Header = ({ currentPage, setCurrentPage, isDarkMode, toggleDarkMode }) => {
   const handleNavClick = (e, key) => {
     e.preventDefault();
     setCurrentPage(key);
@@ -26,6 +26,17 @@ const Header = ({ currentPage, setCurrentPage }) => {
           ))}
         </ul>
         <ul className="icons" aria-label="Social media links">
+          <li>
+            <button
+              onClick={toggleDarkMode}
+              className="icon dark-mode-toggle"
+              aria-label={`Switch to ${isDarkMode ? 'light' : 'dark'} mode`}
+              title={isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              <i className={isDarkMode ? 'fas fa-sun' : 'fas fa-moon'}></i>
+              <span className="label">{isDarkMode ? 'Light Mode' : 'Dark Mode'}</span>
+            </button>
+          </li>
           <li>
             <a 
               href="https://www.linkedin.com/in/justin-sowden-361005184/" 
