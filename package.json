@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "predeploy": "cd my-react-app && npm run build",
-    "deploy": "gh-pages -d my-react-app/build --force"
+    "deploy": "gh-pages -d my-react-app/build"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,19 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
+
+// Helper function to show notifications
+const showNotification = (message, type = 'success') => {
+  const notification = document.createElement('div');
+  notification.setAttribute('role', 'alert');
+  notification.setAttribute('aria-live', 'polite');
+  const bgColor = type === 'success' ? '#4CAF50' : '#f44336';
+  notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${bgColor}; color: white; padding: 1rem 2rem; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-family: inherit;`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  setTimeout(() => {
+    notification.remove();
+  }, 5000);
+};
 
 const ContactForm = ({ theme, animations }) => {
   const [formData, setFormData] = useState({
@@ -8,6 +23,12 @@ const ContactForm = ({ theme, animations }) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [focusedField, setFocusedField] = useState(null);
+
+  // EmailJS configuration - these should be set as environment variables
+  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id';
+  const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'your_template_id';
+  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'your_public_key';
 
   const handleInputChange = (e) => {
     setFormData({
@@ -16,24 +37,40 @@ const ContactForm = ({ theme, animations }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate form submission
-    setTimeout(() => {
+
+    // Check if EmailJS is configured
+    if (SERVICE_ID === 'your_service_id' || TEMPLATE_ID === 'your_template_id' || PUBLIC_KEY === 'your_public_key') {
+      showNotification('Email service is not configured. Please set up EmailJS credentials.', 'error');
       setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      // Initialize EmailJS with public key
+      emailjs.init(PUBLIC_KEY);
+
+      // Send email using EmailJS
+      // Variable names match your EmailJS template: {{name}}, {{email}}, {{message}}, {{title}}, {{time}}
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        title: 'Portfolio Contact Form',
+        time: new Date().toLocaleString()
+      });
+
+      // Success
+      showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
       setFormData({ name: '', email: '', message: '' });
-      // Use a more accessible notification method
-      const notification = document.createElement('div');
-      notification.setAttribute('role', 'alert');
-      notification.setAttribute('aria-live', 'polite');
-      notification.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 1rem 2rem; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 6px rgba(0,0,0,0.1);';
-      notification.textContent = 'Thank you for your message! I\'ll get back to you soon.';
-      document.body.appendChild(notification);
-      setTimeout(() => {
-        notification.remove();
-      }, 5000);
-    }, 2000);
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      showNotification('Sorry, there was an error sending your message. Please try again later.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const styles = {
@@ -61,50 +98,76 @@ const ContactForm = ({ theme, animations }) => {
       textTransform: 'uppercase',
       letterSpacing: '0.05em'
     },
-    input: {
+    getInputStyle: (fieldName) => ({
       padding: '0.75rem 1rem',
-      border: `1px solid ${theme.border}`,
+      border: focusedField === fieldName
+        ? `2px solid ${theme.primary}` 
+        : `2px solid rgba(102, 126, 234, 0.4)`,
       borderRadius: '8px',
-      background: 'rgba(255, 255, 255, 0.1)',
+      background: 'rgba(255, 255, 255, 0.95)',
       color: theme.text,
       fontSize: '1rem',
       transition: 'all 0.3s ease',
       backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)'
-    },
+      WebkitBackdropFilter: 'blur(10px)',
+      outline: 'none',
+      boxShadow: focusedField === fieldName
+        ? `0 0 0 3px rgba(102, 126, 234, 0.1)` 
+        : 'none'
+    }),
     textarea: {
       padding: '0.75rem 1rem',
-      border: `1px solid ${theme.border}`,
+      border: focusedField === 'message' 
+        ? `2px solid ${theme.primary}` 
+        : `2px solid rgba(102, 126, 234, 0.4)`,
       borderRadius: '8px',
-      background: 'rgba(255, 255, 255, 0.1)',
+      background: 'rgba(255, 255, 255, 0.95)',
       color: theme.text,
       fontSize: '1rem',
       resize: 'vertical',
       minHeight: '120px',
       transition: 'all 0.3s ease',
       backdropFilter: 'blur(10px)',
-      WebkitBackdropFilter: 'blur(10px)'
+      WebkitBackdropFilter: 'blur(10px)',
+      outline: 'none',
+      boxShadow: focusedField === 'message' 
+        ? `0 0 0 3px rgba(102, 126, 234, 0.1)` 
+        : 'none'
     },
     actions: {
       listStyle: 'none',
       margin: 0,
       padding: 0,
       display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      width: '100%'
+    },
+    actionItem: {
+      display: 'flex',
+      alignItems: 'center',
       justifyContent: 'center'
     },
     submitButton: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      justifyContent: 'center',
       padding: '1rem 2rem',
       background: `linear-gradient(135deg, ${theme.primary}, ${theme.secondary})`,
       color: theme.textLight,
       border: 'none',
       borderRadius: '12px',
       fontSize: '1rem',
-      fontWeight: 600,
+      fontWeight: 700,
+      letterSpacing: '0.02em',
       cursor: isSubmitting ? 'not-allowed' : 'pointer',
       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       transform: isHovered ? 'translateY(-2px)' : 'translateY(0)',
       boxShadow: isHovered ? theme.shadow : '0 4px 15px rgba(0, 0, 0, 0.2)',
-      opacity: isSubmitting ? 0.7 : 1
+      opacity: isSubmitting ? 0.7 : 1,
+      minWidth: '150px',
+      textAlign: 'center',
+      textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)'
     }
   };
 
@@ -126,7 +189,9 @@ const ContactForm = ({ theme, animations }) => {
             id="name" 
             value={formData.name}
             onChange={handleInputChange}
-            style={styles.input}
+            onFocus={() => setFocusedField('name')}
+            onBlur={() => setFocusedField(null)}
+            style={styles.getInputStyle('name')}
             required
             aria-required="true"
             aria-label="Your name"
@@ -141,7 +206,9 @@ const ContactForm = ({ theme, animations }) => {
             id="email" 
             value={formData.email}
             onChange={handleInputChange}
-            style={styles.input}
+            onFocus={() => setFocusedField('email')}
+            onBlur={() => setFocusedField(null)}
+            style={styles.getInputStyle('email')}
             required
             aria-required="true"
             aria-label="Your email address"
@@ -157,6 +224,8 @@ const ContactForm = ({ theme, animations }) => {
           rows="6"
           value={formData.message}
           onChange={handleInputChange}
+          onFocus={() => setFocusedField('message')}
+          onBlur={() => setFocusedField(null)}
           style={styles.textarea}
           required
           aria-required="true"
@@ -165,7 +234,7 @@ const ContactForm = ({ theme, animations }) => {
         ></textarea>
       </div>
       <ul className="actions" style={styles.actions} role="list">
-        <li>
+        <li style={styles.actionItem}>
           <button 
             type="submit"
             style={styles.submitButton}
@@ -200,14 +269,17 @@ const ContactInfo = ({ title, content, isLink = false, theme, animations, index 
     },
     content: {
       color: theme.text,
-      opacity: 0.8,
+      opacity: 0.9,
       lineHeight: 1.6,
-      margin: 0
+      margin: 0,
+      fontSize: '1rem'
     },
     link: {
       color: theme.primary,
       textDecoration: 'none',
-      transition: 'color 0.3s ease'
+      transition: 'color 0.3s ease',
+      fontWeight: 600,
+      opacity: 1
     }
   };
 
@@ -236,8 +308,7 @@ const SocialLinks = ({ theme, animations }) => {
 
   const socialIcons = [
     { icon: 'fa-linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/justin-sowden-361005184/' },
-    { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/jsowden2015' },
-    { icon: 'fa-envelope', label: 'Email', href: 'mailto:justin@example.com' }
+    { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/jsowden2015' }
   ];
 
   const styles = {
@@ -306,13 +377,8 @@ const Contact = ({ theme, animations }) => {
   const contactInfo = [
     {
       title: 'Address',
-      content: '1234 Somewhere Road #87257\nNashville, TN 00000-0000',
+      content: 'Boston, MA (Remote)',
       isAlt: true
-    },
-    {
-      title: 'Phone',
-      content: '(000) 000-0000',
-      isLink: true
     },
     {
       title: 'Email',

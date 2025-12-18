@@ -11,14 +11,14 @@ export const THEMES = {
     border: 'rgba(255, 255, 255, 0.2)'
   },
   dark: {
-    primary: '#2c3e50',
-    secondary: '#34495e',
-    background: 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)',
-    surface: 'rgba(44, 62, 80, 0.95)',
-    text: '#ecf0f1',
+    primary: '#667eea',
+    secondary: '#764ba2',
+    background: 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)',
+    surface: 'rgba(26, 32, 44, 0.95)',
+    text: '#f7fafc',
     textLight: '#ffffff',
     shadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-    border: 'rgba(255, 255, 255, 0.1)'
+    border: 'rgba(255, 255, 255, 0.15)'
   }
 };
 
