@@ -1,5 +1,5 @@
 import React from 'react';
-import { PORTFOLIO_PROJECTS, CONTACT_INFO, THEMES, ANIMATIONS } from '../config/constants';
+import { PORTFOLIO_PROJECTS, THEMES, ANIMATIONS } from '../config/constants';
 import Contact from './Contact';
 
 const MainContent = ({ currentPage }) => {
@@ -59,36 +59,6 @@ const MainContent = ({ currentPage }) => {
     </article>
   );
 
-  const renderProjects = () => (
-    <section className="posts" aria-label="Featured projects">
-      <h1 className="sr-only">Projects</h1>
-      <article>
-        <header>
-          <span className="date" aria-label="Project category: Featured Project">Featured Project</span>
-          <h2>React Portfolio Website</h2>
-        </header>
-        <div className="image fit" role="img" aria-label="React Portfolio Website project image">
-          <img src="/images/pic02.jpg" alt="React Portfolio Website - A modern, responsive portfolio built with React" />
-        </div>
-        <p>
-          A modern, responsive portfolio built with React.
-          Demonstrates clean code structure and modern web development practices.
-        </p>
-        <ul className="actions special">
-          <li>
-            <button 
-              type="button" 
-              className="button"
-              aria-label="View React Portfolio Website project details"
-            >
-              View Project
-            </button>
-          </li>
-        </ul>
-      </article>
-    </section>
-  );
-
   const renderContact = () => (
     <Contact theme={THEMES.light} animations={ANIMATIONS} />
   );
@@ -99,8 +69,6 @@ const MainContent = ({ currentPage }) => {
         return renderPortfolio();
       case 'generic':
         return renderAbout();
-      case 'elements':
-        return renderProjects();
       case 'contact':
         return renderContact();
       default:

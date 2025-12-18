@@ -84,18 +84,7 @@ const SocialLinks = () => (
     <ul className="icons alt" role="list">
       <li>
         <a 
-          href="https://twitter.com/justinsowden" 
-          className="icon brands alt fa-twitter" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          aria-label="Visit Justin Sowden's Twitter profile (opens in new tab)"
-        >
-          <span className="label">Twitter</span>
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://linkedin.com/in/justin-sowden" 
+          href="https://www.linkedin.com/in/justin-sowden-361005184/" 
           className="icon brands alt fa-linkedin" 
           target="_blank" 
           rel="noopener noreferrer"
@@ -106,18 +95,7 @@ const SocialLinks = () => (
       </li>
       <li>
         <a 
-          href="https://instagram.com/justinsowden" 
-          className="icon brands alt fa-instagram" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          aria-label="Visit Justin Sowden's Instagram profile (opens in new tab)"
-        >
-          <span className="label">Instagram</span>
-        </a>
-      </li>
-      <li>
-        <a 
-          href="https://github.com/justinsowden" 
+          href="https://github.com/jsowden2015" 
           className="icon brands alt fa-github" 
           target="_blank" 
           rel="noopener noreferrer"

@@ -43,15 +43,13 @@ export const ANIMATIONS = {
 export const NAVIGATION_ITEMS = [
   { key: 'portfolio', label: 'Portfolio' },
   { key: 'generic', label: 'About Me' },
-  { key: 'elements', label: 'Projects' },
   { key: 'contact', label: 'Contact' }
 ];
 
 // Social media links
 export const SOCIAL_LINKS = [
-  { icon: 'fa-twitter', label: 'Twitter', href: 'https://twitter.com/justinsowden' },
-  { icon: 'fa-linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/justin-sowden' },
-  { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/justinsowden' },
+  { icon: 'fa-linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/justin-sowden-361005184/' },
+  { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/jsowden2015' },
   { icon: 'fa-envelope', label: 'Email', href: 'mailto:justin@example.com' }
 ];
 
@@ -77,39 +75,39 @@ export const CONTACT_INFO = [
 export const PORTFOLIO_PROJECTS = [
   {
     date: 'Web Development',
-    title: 'JustShare\nLanding Page',
+    title: 'JustShare\nFile Sharing Platform',
     image: '/images/just-share.jpg',
-    description: 'JustShare - Secure file sharing landing page built with React. Features modern design with secure file sharing, fast upload/download speeds, and real-time collaboration capabilities.'
+    description: 'A modern file sharing application built with React, TypeScript, and Vite. Demonstrates growth engineering principles, monetization strategies, and full-stack development skills. Features include sign-up flow, trial conversion, dashboard with file management, storage tracking, and premium upsell flow.'
   },
   {
     date: 'UI/UX Design',
-    title: 'ParkPay\nMobile App',
+    title: 'ParkPay\nParking Payment App',
     image: '/images/parkpay-mobile-app.jpg',
-    description: 'ParkPay mobile application interface for paying parking tickets. Features intuitive step-by-step process, ticket and license plate search, and seamless payment flow.'
-  },
-  {
-    date: 'Full Stack',
-    title: 'E-commerce\nPlatform',
-    image: '/images/pic04.jpg',
-    description: 'Complete e-commerce solution with payment processing, inventory management, and responsive design.'
-  },
-  {
-    date: 'Creative Design',
-    title: 'Brand Identity\nPackage',
-    image: '/images/pic05.jpg',
-    description: 'Comprehensive brand development including logo design, color schemes, and marketing materials.'
-  },
-  {
-    date: 'Backend Development',
-    title: 'API Development\n& Integration',
-    image: '/images/pic06.jpg',
-    description: 'Robust backend systems with RESTful APIs, database design, and third-party service integration.'
+    description: 'A comprehensive UX/UI design project for Google UX Certification. Multi-platform parking ticket payment application with iOS mobile app and responsive desktop web app. Features streamlined four-step process (lookup, review, payment, confirmation) with progress indicators, plus complete design system and design documentation.'
   },
   {
     date: 'Frontend Development',
-    title: 'Interactive\nWeb Applications',
+    title: 'JustStream\nWebApp',
+    image: '/images/just-stream.jpg',
+    description: 'A modern, full-featured streaming service dashboard built with React, TypeScript, and Redux Toolkit. Features infinite scrolling, lazy loading, video player integration, code splitting, error handling, and CI/CD pipeline setup.'
+  },
+  {
+    date: 'Full Stack Development',
+    title: 'JustChat\nApplication',
+    image: '/images/just-chat.jpg',
+    description: 'A modern, real-time chat application built with React, Firebase, and Redux. Features real-time messaging with typing indicators and reactions, Google authentication, rich messaging (images, emojis, mentions, message editing), voice channels with mic controls, member presence tracking, and browser notifications. Discord-inspired UI built for learning and portfolio demonstration.'
+  },
+  {
+    date: 'Coming Soon',
+    title: 'Coming Soon',
+    image: '/images/pic06.jpg',
+    description: 'More exciting projects are on the way. Stay tuned!'
+  },
+  {
+    date: 'Coming Soon',
+    title: 'Coming Soon',
     image: '/images/pic07.jpg',
-    description: 'Dynamic web applications with modern JavaScript frameworks and responsive design principles.'
+    description: 'More exciting projects are on the way. Stay tuned!'
   }
 ];
 

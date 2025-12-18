@@ -235,9 +235,8 @@ const SocialLinks = ({ theme, animations }) => {
   const [hoveredIcon, setHoveredIcon] = useState(null);
 
   const socialIcons = [
-    { icon: 'fa-twitter', label: 'Twitter', href: 'https://twitter.com/justinsowden' },
-    { icon: 'fa-linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/justin-sowden' },
-    { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/justinsowden' },
+    { icon: 'fa-linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/justin-sowden-361005184/' },
+    { icon: 'fa-github', label: 'GitHub', href: 'https://github.com/jsowden2015' },
     { icon: 'fa-envelope', label: 'Email', href: 'mailto:justin@example.com' }
   ];
 

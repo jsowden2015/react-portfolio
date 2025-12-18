@@ -1,6 +1,28 @@
-# Getting Started with Create React App
+# Justin Sowden - Portfolio Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive portfolio website built with React showcasing my web development projects and skills.
+
+## Features
+
+- **Portfolio Section**: Showcase of featured projects with descriptions and images
+- **About Me**: Personal background and information
+- **Contact**: Contact form and social media links
+- **Accessibility**: WCAG compliant with skip links, semantic HTML, and proper ARIA attributes
+- **Responsive Design**: Optimized for all screen sizes
+
+## Projects Featured
+
+- **JustShare** - File Sharing Platform (Web Development)
+- **ParkPay** - Parking Payment App (UI/UX Design) 
+- **JustStream** - Streaming Dashboard WebApp (Frontend Development)
+- **JustChat** - Chat Application (Creative Design)
+
+## Technologies Used
+
+- React 18.3.1
+- React DOM 18.3.1
+- React Scripts 5.0.1
+- CSS3
 
 ## Available Scripts
 
@@ -39,32 +61,36 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+## Project Structure
+
+```
+src/
+  Components/
+    Contact.js       # Contact form component
+    Footer.js        # Footer with social links
+    Header.js        # Navigation header
+    HeroSection.js   # Hero section component
+    MainContent.js   # Main content router
+    MoreAbout.js     # About me section
+    Navbar.js        # Navigation bar
+    Projects.js      # Projects display
+    Skills.js        # Skills section
+    Socials.js       # Social media links
+  config/
+    constants.js     # Configuration and project data
+  App.js             # Main app component
+  App.css            # App styles
+  index.js           # Entry point
+  index.css          # Global styles
+```
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Contact & Links
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **LinkedIn**: [https://www.linkedin.com/in/justin-sowden-361005184/](https://www.linkedin.com/in/justin-sowden-361005184/)
+- **GitHub**: [https://github.com/jsowden2015](https://github.com/jsowden2015)
