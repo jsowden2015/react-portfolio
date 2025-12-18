@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { NAVIGATION_ITEMS } from '../config/constants';
+import PropTypes from 'prop-types';
+import { NAVIGATION_ITEMS, BREAKPOINTS } from '../config/constants';
 
 const Header = ({ currentPage, setCurrentPage, isDarkMode, toggleDarkMode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,7 +28,8 @@ const Header = ({ currentPage, setCurrentPage, isDarkMode, toggleDarkMode }) => 
     };
 
     const handleResize = () => {
-      if (window.innerWidth > 980) {
+      // Use breakpoint constant
+      if (window.innerWidth > BREAKPOINTS.DESKTOP) {
         setIsMobileMenuOpen(false);
       }
     };
@@ -106,6 +108,13 @@ const Header = ({ currentPage, setCurrentPage, isDarkMode, toggleDarkMode }) => 
       </nav>
     </header>
   );
+};
+
+Header.propTypes = {
+  currentPage: PropTypes.string.isRequired,
+  setCurrentPage: PropTypes.func.isRequired,
+  isDarkMode: PropTypes.bool.isRequired,
+  toggleDarkMode: PropTypes.func.isRequired
 };
 
 export default Header;

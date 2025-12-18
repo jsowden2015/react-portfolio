@@ -1,3 +1,28 @@
+// Page keys (avoid magic strings) - Must be defined first
+export const PAGE_KEYS = {
+  PORTFOLIO: 'portfolio',
+  ABOUT: 'generic',
+  CONTACT: 'contact'
+};
+
+// Breakpoints (avoid magic numbers)
+export const BREAKPOINTS = {
+  MOBILE: 480,
+  TABLET: 736,
+  DESKTOP: 980,
+  LARGE_DESKTOP: 1280,
+  XL_DESKTOP: 1680
+};
+
+// Z-index layers (avoid magic numbers)
+export const Z_INDEX = {
+  BASE: 1,
+  HEADER: 2,
+  MOBILE_MENU: 99999,
+  MOBILE_TOGGLE: 100000,
+  NOTIFICATION: 10000
+};
+
 // Theme configurations
 export const THEMES = {
   light: {
@@ -41,9 +66,9 @@ export const ANIMATIONS = {
 
 // Navigation configuration
 export const NAVIGATION_ITEMS = [
-  { key: 'portfolio', label: 'Portfolio' },
-  { key: 'generic', label: 'About Me' },
-  { key: 'contact', label: 'Contact' }
+  { key: PAGE_KEYS.PORTFOLIO, label: 'Portfolio' },
+  { key: PAGE_KEYS.ABOUT, label: 'About Me' },
+  { key: PAGE_KEYS.CONTACT, label: 'Contact' }
 ];
 
 // Social media links
@@ -117,7 +142,7 @@ export const PORTFOLIO_PROJECTS = [
 
 // App configuration
 export const APP_CONFIG = {
-  defaultPage: 'portfolio',
+  defaultPage: PAGE_KEYS.PORTFOLIO,
   defaultTheme: 'light',
   loadingDuration: 2000,
   fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'

@@ -1162,6 +1162,7 @@ header.major > .date:after {
 	}
 }
 
+/* Breakpoint: 980px (BREAKPOINTS.DESKTOP) - Mobile menu appears below this */
 @media screen and (max-width: 980px) {
 	#header {
 		z-index: 99998;
@@ -1172,7 +1173,7 @@ header.major > .date:after {
 		position: fixed !important;
 		top: 1rem;
 		right: 1rem;
-		z-index: 100000 !important;
+		z-index: 100000 !important; /* Z_INDEX.MOBILE_TOGGLE */
 		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 		border: none;
 		border-radius: 10px;
@@ -1213,7 +1214,7 @@ header.major > .date:after {
 		border-radius: 0;
 		border: none;
 		box-shadow: none;
-		z-index: 99999 !important;
+		z-index: 99999 !important; /* Z_INDEX.MOBILE_MENU */
 		overflow-y: auto;
 		animation: none;
 		opacity: 0;

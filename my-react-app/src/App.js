@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './Components/Header';
 import MainContent from './Components/MainContent';
+import ErrorBoundary from './Components/ErrorBoundary';
+import { APP_CONFIG, PAGE_KEYS, Z_INDEX } from './config/constants';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('portfolio');
+  const [currentPage, setCurrentPage] = useState(APP_CONFIG.defaultPage);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Check localStorage for saved preference, default to light mode
     const saved = localStorage.getItem('darkMode');
@@ -36,7 +38,7 @@ function App() {
         style={{ 
           position: 'absolute', 
           left: '-9999px', 
-          zIndex: 999,
+          zIndex: Z_INDEX.NOTIFICATION,
           top: '0',
           background: '#000', 
           color: '#fff', 
@@ -52,8 +54,10 @@ function App() {
       >
         Skip to main content
       </a>
-      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-      <MainContent currentPage={currentPage} isDarkMode={isDarkMode} />
+      <ErrorBoundary>
+        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+        <MainContent currentPage={currentPage} isDarkMode={isDarkMode} />
+      </ErrorBoundary>
       
       {/* Copyright */}
       <div id="copyright">

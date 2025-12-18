@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import emailjs from '@emailjs/browser';
+import { Z_INDEX } from '../config/constants';
+
+// Notification configuration
+const NOTIFICATION_CONFIG = {
+  SUCCESS_COLOR: '#4CAF50',
+  ERROR_COLOR: '#f44336',
+  DURATION: 5000,
+  POSITION: { top: '20px', right: '20px' }
+};
 
 // Helper function to show notifications
 const showNotification = (message, type = 'success') => {
   const notification = document.createElement('div');
   notification.setAttribute('role', 'alert');
   notification.setAttribute('aria-live', 'polite');
-  const bgColor = type === 'success' ? '#4CAF50' : '#f44336';
-  notification.style.cssText = `position: fixed; top: 20px; right: 20px; background: ${bgColor}; color: white; padding: 1rem 2rem; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-family: inherit;`;
+  const bgColor = type === 'success' ? NOTIFICATION_CONFIG.SUCCESS_COLOR : NOTIFICATION_CONFIG.ERROR_COLOR;
+  notification.style.cssText = `position: fixed; top: ${NOTIFICATION_CONFIG.POSITION.top}; right: ${NOTIFICATION_CONFIG.POSITION.right}; background: ${bgColor}; color: white; padding: 1rem 2rem; border-radius: 8px; z-index: ${Z_INDEX.NOTIFICATION}; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-family: inherit;`;
   notification.textContent = message;
   document.body.appendChild(notification);
   setTimeout(() => {
     notification.remove();
-  }, 5000);
+  }, NOTIFICATION_CONFIG.DURATION);
 };
 
 const ContactForm = ({ theme, animations }) => {
@@ -26,9 +36,11 @@ const ContactForm = ({ theme, animations }) => {
   const [focusedField, setFocusedField] = useState(null);
 
   // EmailJS configuration - these should be set as environment variables
-  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id';
-  const TEMPLATE_ID = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'your_template_id';
-  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'your_public_key';
+  const EMAILJS_CONFIG = {
+    SERVICE_ID: process.env.REACT_APP_EMAILJS_SERVICE_ID || 'your_service_id',
+    TEMPLATE_ID: process.env.REACT_APP_EMAILJS_TEMPLATE_ID || 'your_template_id',
+    PUBLIC_KEY: process.env.REACT_APP_EMAILJS_PUBLIC_KEY || 'your_public_key'
+  };
 
   const handleInputChange = (e) => {
     setFormData({
@@ -42,7 +54,11 @@ const ContactForm = ({ theme, animations }) => {
     setIsSubmitting(true);
 
     // Check if EmailJS is configured
-    if (SERVICE_ID === 'your_service_id' || TEMPLATE_ID === 'your_template_id' || PUBLIC_KEY === 'your_public_key') {
+    if (
+      EMAILJS_CONFIG.SERVICE_ID === 'your_service_id' || 
+      EMAILJS_CONFIG.TEMPLATE_ID === 'your_template_id' || 
+      EMAILJS_CONFIG.PUBLIC_KEY === 'your_public_key'
+    ) {
       showNotification('Email service is not configured. Please set up EmailJS credentials.', 'error');
       setIsSubmitting(false);
       return;
@@ -50,11 +66,11 @@ const ContactForm = ({ theme, animations }) => {
 
     try {
       // Initialize EmailJS with public key
-      emailjs.init(PUBLIC_KEY);
+      emailjs.init(EMAILJS_CONFIG.PUBLIC_KEY);
 
       // Send email using EmailJS
       // Variable names match your EmailJS template: {{name}}, {{email}}, {{message}}, {{title}}, {{time}}
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
+      await emailjs.send(EMAILJS_CONFIG.SERVICE_ID, EMAILJS_CONFIG.TEMPLATE_ID, {
         name: formData.name,
         email: formData.email,
         message: formData.message,
@@ -233,7 +249,7 @@ const ContactForm = ({ theme, animations }) => {
           aria-invalid={false}
         ></textarea>
       </div>
-      <ul className="actions" style={styles.actions} role="list">
+      <ul className="actions" style={styles.actions}>
         <li style={styles.actionItem}>
           <button 
             type="submit"
@@ -252,7 +268,18 @@ const ContactForm = ({ theme, animations }) => {
   );
 };
 
+ContactForm.propTypes = {
+  theme: PropTypes.object.isRequired,
+  animations: PropTypes.object.isRequired
+};
+
 const ContactInfo = ({ title, content, isLink = false, theme, animations, index }) => {
+  const getHref = () => {
+    if (!isLink) return '#';
+    if (title === 'Phone') return `tel:${content}`;
+    if (title === 'Email') return `mailto:${content}`;
+    return '#';
+  };
   const styles = {
     section: {
       marginBottom: '2rem',
@@ -289,9 +316,10 @@ const ContactInfo = ({ title, content, isLink = false, theme, animations, index 
       {isLink ? (
         <p style={styles.content}>
           <a 
-            href={title === 'Phone' ? `tel:${content}` : title === 'Email' ? `mailto:${content}` : '#'} 
+            href={getHref()}
             style={styles.link}
             aria-label={`${title}: ${content}`}
+            onClick={title !== 'Phone' && title !== 'Email' ? (e) => e.preventDefault() : undefined}
           >
             {content}
           </a>
@@ -301,6 +329,15 @@ const ContactInfo = ({ title, content, isLink = false, theme, animations, index 
       )}
     </section>
   );
+};
+
+ContactInfo.propTypes = {
+  title: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  isLink: PropTypes.bool,
+  theme: PropTypes.object.isRequired,
+  animations: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 const SocialLinks = ({ theme, animations }) => {
@@ -371,6 +408,11 @@ const SocialLinks = ({ theme, animations }) => {
       </ul>
     </section>
   );
+};
+
+SocialLinks.propTypes = {
+  theme: PropTypes.object.isRequired,
+  animations: PropTypes.object.isRequired
 };
 
 const Contact = ({ theme, animations }) => {
@@ -468,6 +510,11 @@ const Contact = ({ theme, animations }) => {
       </div>
     </div>
   );
+};
+
+Contact.propTypes = {
+  theme: PropTypes.object.isRequired,
+  animations: PropTypes.object.isRequired
 };
 
 export default Contact;
