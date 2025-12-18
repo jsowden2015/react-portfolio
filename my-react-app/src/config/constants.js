@@ -87,27 +87,27 @@ export const PORTFOLIO_PROJECTS = [
   },
   {
     date: 'Frontend Development',
-    title: 'JustStream\nStreaming Dashboard',
+    title: 'JustStream\nWebApp',
     image: '/images/just-stream.jpg',
     description: 'A modern, full-featured streaming service dashboard built with React, TypeScript, and Redux Toolkit. Features infinite scrolling, lazy loading, video player integration, code splitting, error handling, and CI/CD pipeline setup.'
   },
   {
-    date: 'Creative Design',
-    title: 'Brand Identity\nPackage',
-    image: '/images/pic05.jpg',
-    description: 'Comprehensive brand development including logo design, color schemes, and marketing materials.'
+    date: 'Full Stack Development',
+    title: 'JustChat\nApplication',
+    image: '/images/just-chat.jpg',
+    description: 'A modern, real-time chat application built with React, Firebase, and Redux. Features real-time messaging with typing indicators and reactions, Google authentication, rich messaging (images, emojis, mentions, message editing), voice channels with mic controls, member presence tracking, and browser notifications. Discord-inspired UI built for learning and portfolio demonstration.'
   },
   {
-    date: 'Backend Development',
-    title: 'API Development\n& Integration',
+    date: 'Coming Soon',
+    title: 'Coming Soon',
     image: '/images/pic06.jpg',
-    description: 'Robust backend systems with RESTful APIs, database design, and third-party service integration.'
+    description: 'More exciting projects are on the way. Stay tuned!'
   },
   {
-    date: 'Frontend Development',
-    title: 'Interactive\nWeb Applications',
+    date: 'Coming Soon',
+    title: 'Coming Soon',
     image: '/images/pic07.jpg',
-    description: 'Dynamic web applications with modern JavaScript frameworks and responsive design principles.'
+    description: 'More exciting projects are on the way. Stay tuned!'
   }
 ];
 
