@@ -379,11 +379,6 @@ const Contact = ({ theme, animations }) => {
       title: 'Address',
       content: 'Boston, MA (Remote)',
       isAlt: true
-    },
-    {
-      title: 'Email',
-      content: 'info@untitled.tld',
-      isLink: true
     }
   ];
 

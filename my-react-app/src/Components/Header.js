@@ -1,16 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { NAVIGATION_ITEMS } from '../config/constants';
 
 const Header = ({ currentPage, setCurrentPage, isDarkMode, toggleDarkMode }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const navRef = useRef(null);
+  const buttonRef = useRef(null);
+
   const handleNavClick = (e, key) => {
     e.preventDefault();
     setCurrentPage(key);
+    setIsMobileMenuOpen(false);
   };
+
+  // Close menu when clicking outside or resizing to desktop
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMobileMenuOpen &&
+        navRef.current &&
+        buttonRef.current &&
+        !navRef.current.contains(event.target) &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth > 980) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <header id="header" role="banner">
       <a href="#main" className="logo" aria-label="Justin Sowden - Home">Justin Sowden</a>
-      <nav id="nav" role="navigation" aria-label="Main navigation">
+      <button
+        ref={buttonRef}
+        className="mobile-menu-toggle"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        aria-label="Toggle mobile menu"
+        aria-expanded={isMobileMenuOpen}
+      >
+        <i className={isMobileMenuOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
+      </button>
+      <nav ref={navRef} id="nav" role="navigation" aria-label="Main navigation" className={isMobileMenuOpen ? 'mobile-open' : ''}>
         <ul className="links">
           {NAVIGATION_ITEMS.map((item) => (
             <li key={item.key} className={currentPage === item.key ? 'active' : ''}>

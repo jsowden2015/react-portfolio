@@ -8,7 +8,7 @@ const MainContent = ({ currentPage, isDarkMode }) => {
       <article className="post featured">
         <header className="major">
           <h1 className="name-gradient">Justin Sowden</h1>
-          <p>Full Stack Developer & Designer</p>
+          <p>Full Stack Developer</p>
         </header>
       </article>
       <section className="posts" aria-label="Portfolio projects">
@@ -27,13 +27,25 @@ const MainContent = ({ currentPage, isDarkMode }) => {
           <p>{project.description}</p>
           <ul className="actions special">
             <li>
-              <button 
-                type="button" 
-                className="button"
-                aria-label={`View full details for ${project.title}`}
-              >
-                Full Story
-              </button>
+              {project.repoUrl ? (
+                <a 
+                  href={project.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button"
+                  aria-label={`View ${project.title} repository on GitHub`}
+                >
+                  View on GitHub
+                </a>
+              ) : (
+                <button 
+                  type="button" 
+                  className="button"
+                  aria-label={`View full details for ${project.title}`}
+                >
+                  Full Story
+                </button>
+              )}
             </li>
           </ul>
         </article>
@@ -45,24 +57,27 @@ const MainContent = ({ currentPage, isDarkMode }) => {
   const renderAbout = () => (
     <article className="post">
       <header className="major">
-        <span className="date" aria-label="Section: About Me">About Me</span>
-        <h1>Welcome to My Portfolio</h1>
+        <h2 className="name-gradient">About Justin Sowden</h2>
         <p>
-          I'm a passionate developer and designer creating modern web experiences.
-          This portfolio showcases my work, skills, and projects.
+          Software Developer @ Eliassen Group (100% Remote) | BS | Greater Boston
         </p>
       </header>
-      <div className="image main">
-        <img src={`${process.env.PUBLIC_URL}/images/pic01.jpg`} alt="Justin Sowden - Developer and Designer" />
-      </div>
       <p>
-        With a focus on clean code, user experience, and modern design principles,
-        I create digital solutions that are both functional and beautiful.
+        Full Stack Developer with 4+ years' experience designing and building scalable web applications using Angular (v13/14) and Java (Spring Boot). Skilled in developing RESTful APIs, managing source control with Git, and integrating frontend applications with backend services.
       </p>
       <p>
-        My expertise spans frontend and backend development, UI/UX design, and
-        full-stack application development. I'm always learning and exploring
-        new technologies to stay at the forefront of web development.
+        Adept at mentoring junior developers, collaborating in Agile/Scrum teams, and delivering responsive, maintainable code. Experienced in RxJS state management, unit testing with Jasmine/Karma, and using Docker for local database development environments.
+      </p>
+      <p>
+        For more information about my experience, education, and professional background, please visit my{' '}
+        <a 
+          href="https://www.linkedin.com/in/justin-sowden-361005184/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          aria-label="Visit Justin Sowden's LinkedIn profile (opens in new tab)"
+        >
+          LinkedIn profile
+        </a>.
       </p>
     </article>
   );
