@@ -22,7 +22,7 @@ const MainContent = ({ currentPage, isDarkMode }) => {
             </h2>
           </header>
           <div className="image fit" role="img" aria-label={`${project.title} project image`}>
-            <img src={`${process.env.PUBLIC_URL}${project.image}`} alt={`${project.title} - ${project.description}`} />
+            <img src={`${process.env.PUBLIC_URL}/${project.image}`} alt={`${project.title} - ${project.description}`} />
           </div>
           <p>{project.description}</p>
           <ul className="actions special">
