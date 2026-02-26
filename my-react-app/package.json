@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "homepage": "https://www.justinsowden.com",
   "private": true,
+  "overrides": {
+    "jsonpath": "1.2.1"
+  },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "@testing-library/jest-dom": "^5.17.0",
