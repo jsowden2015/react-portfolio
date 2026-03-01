@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Components/Header';
 import MainContent from './Components/MainContent';
 import ErrorBoundary from './Components/ErrorBoundary';
-import { APP_CONFIG, Z_INDEX } from './config/constants';
+import { APP_CONFIG } from './config/constants';
 
 function App() {
   const [currentPage, setCurrentPage] = useState(APP_CONFIG.defaultPage);
@@ -35,16 +35,6 @@ function App() {
       <a 
         href="#main" 
         className="skip-to-main"
-        style={{ 
-          position: 'absolute', 
-          left: '-9999px', 
-          zIndex: Z_INDEX.NOTIFICATION,
-          top: '0',
-          background: '#000', 
-          color: '#fff', 
-          padding: '1rem',
-          textDecoration: 'none'
-        }}
         onFocus={(e) => {
           e.target.style.left = '0';
         }}
@@ -61,7 +51,7 @@ function App() {
       
       {/* Copyright */}
       <div id="copyright">
-        <ul><li>&copy; Justin Sowden</li></ul>
+        <ul><li>&copy; {new Date().getFullYear()} Justin Sowden</li></ul>
       </div>
     </div>
   );
