@@ -5,17 +5,17 @@ import Portfolio from './Portfolio';
 import About from './About';
 import Contact from './Contact';
 
-const MainContent = ({ currentPage, isDarkMode }) => {
+const MainContent = ({ currentPage, isDarkMode, setCurrentPage }) => {
   const renderContent = () => {
     switch (currentPage) {
       case PAGE_KEYS.PORTFOLIO:
-        return <Portfolio />;
+        return <Portfolio setCurrentPage={setCurrentPage} />;
       case PAGE_KEYS.ABOUT:
         return <About />;
       case PAGE_KEYS.CONTACT:
         return <Contact theme={isDarkMode ? THEMES.dark : THEMES.light} animations={ANIMATIONS} />;
       default:
-        return <Portfolio />;
+        return <Portfolio setCurrentPage={setCurrentPage} />;
     }
   };
 
@@ -28,7 +28,8 @@ const MainContent = ({ currentPage, isDarkMode }) => {
 
 MainContent.propTypes = {
   currentPage: PropTypes.string.isRequired,
-  isDarkMode: PropTypes.bool.isRequired
+  isDarkMode: PropTypes.bool.isRequired,
+  setCurrentPage: PropTypes.func.isRequired
 };
 
 export default MainContent;

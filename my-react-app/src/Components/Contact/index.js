@@ -3,14 +3,7 @@ import PropTypes from 'prop-types';
 import ContactForm from './ContactForm';
 import ContactInfo from './ContactInfo';
 import SocialLinks from './SocialLinks';
-
-const contactInfo = [
-    {
-        title: 'Address',
-        content: 'Boston, MA (Remote)',
-        isAlt: true
-    }
-];
+import { CONTACT_INFO } from '../../config/constants';
 
 const Contact = ({ theme, animations }) => {
     const styles = {
@@ -83,9 +76,9 @@ const Contact = ({ theme, animations }) => {
 
                 <section style={styles.infoSection} aria-label="Contact information section">
                     <h2 style={{ color: theme.text, marginBottom: '2rem' }}>Contact Information</h2>
-                    {contactInfo.map((info, index) => (
+                    {CONTACT_INFO.map((info, index) => (
                         <ContactInfo
-                            key={index}
+                            key={info.title}
                             title={info.title}
                             content={info.content}
                             isLink={info.isLink}

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProjectCard = ({ project, index }) => {
+const ProjectCard = ({ project }) => {
+  const titleLines = project.title.split('\n');
+  const hasActions = Boolean(project.repoUrl || project.demoUrl);
+
   return (
     <article>
       <header>
@@ -9,44 +12,59 @@ const ProjectCard = ({ project, index }) => {
           {project.date}
         </span>
         <h2>
-          {project.title.split('\n').map((line, i) => (
-            <React.Fragment key={i}>
+          {titleLines.map((line, i) => (
+            <React.Fragment key={`${line}-${i}`}>
               {line}
-              {i < project.title.split('\n').length - 1 && <br />}
+              {i < titleLines.length - 1 && <br />}
             </React.Fragment>
           ))}
         </h2>
       </header>
-      <div className="image fit" role="img" aria-label={`${project.title} project image`}>
-        <img 
-          src={`${process.env.PUBLIC_URL}/${project.image}`} 
-          alt={`${project.title} - ${project.description}`} 
+      <div className="image fit">
+        <img
+          src={`${process.env.PUBLIC_URL}/${project.image}`}
+          alt=""
+          loading="lazy"
         />
       </div>
       <p>{project.description}</p>
-      <ul className="actions special">
-        <li>
-          {project.repoUrl ? (
-            <a 
-              href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button"
-              aria-label={`View ${project.title} repository on GitHub`}
-            >
-              View on GitHub
-            </a>
-          ) : (
-            <button 
-              type="button" 
-              className="button"
-              aria-label={`View full details for ${project.title}`}
-            >
-              Full Story
-            </button>
+      {project.tags?.length > 0 && (
+        <ul className="project-tags" aria-label="Technologies used">
+          {project.tags.map((tag) => (
+            <li key={tag}>{tag}</li>
+          ))}
+        </ul>
+      )}
+      {hasActions && (
+        <ul className="actions special">
+          {project.demoUrl && (
+            <li>
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="button"
+                aria-label={`View live demo of ${titleLines[0]}`}
+              >
+                Live demo
+              </a>
+            </li>
           )}
-        </li>
-      </ul>
+          {project.repoUrl && (
+            <li>
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`button${project.demoUrl ? ' secondary' : ''}`}
+                aria-label={`View ${titleLines[0]} repository on GitHub`}
+              >
+                View on GitHub
+              </a>
+            </li>
+          )}
+        </ul>
+      )}
     </article>
   );
 };
@@ -57,10 +75,10 @@ ProjectCard.propTypes = {
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    repoUrl: PropTypes.string
-  }).isRequired,
-  index: PropTypes.number.isRequired
+    tags: PropTypes.arrayOf(PropTypes.string),
+    repoUrl: PropTypes.string,
+    demoUrl: PropTypes.string
+  }).isRequired
 };
 
 export default ProjectCard;
-

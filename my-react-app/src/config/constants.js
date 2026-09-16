@@ -14,4 +14,4 @@ export { THEMES, ANIMATIONS } from './theme';
 
 export { NAVIGATION_ITEMS, SOCIAL_LINKS } from './nav';
 
-export { CONTACT_INFO, PORTFOLIO_PROJECTS } from './content';
+export { CONTACT_INFO, CONTACT_EMAIL, ABOUT, PORTFOLIO_PROJECTS } from './content';

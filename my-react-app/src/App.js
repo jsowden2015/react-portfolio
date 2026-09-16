@@ -46,7 +46,11 @@ function App() {
       </a>
       <ErrorBoundary>
         <Header currentPage={currentPage} setCurrentPage={setCurrentPage} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-        <MainContent currentPage={currentPage} isDarkMode={isDarkMode} />
+        <MainContent
+          currentPage={currentPage}
+          isDarkMode={isDarkMode}
+          setCurrentPage={setCurrentPage}
+        />
       </ErrorBoundary>
       
       {/* Copyright */}

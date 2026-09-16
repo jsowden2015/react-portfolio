@@ -771,32 +771,70 @@ header.major > .date:after {
 }
 
 #nav button.dark-mode-toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	min-width: 2.25rem;
+	min-height: 2.25rem;
+	padding: 0;
+	margin: 0;
+	line-height: 1;
 	background: transparent;
 	border: none;
+	border-radius: 0;
+	box-shadow: none;
 	cursor: pointer;
-	padding: 0;
+	overflow: visible;
+	position: relative;
 	color: #ffffff;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #nav button.dark-mode-toggle:hover {
+	background: transparent;
+	box-shadow: none;
 	color: #ffffff;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+	transform: translateY(-1px);
 }
 
 #nav button.dark-mode-toggle:before {
 	display: none !important;
 }
 
+#nav button.dark-mode-toggle::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 2px;
+	/* Match social icon links: their ::after sits on a shorter inline box */
+	bottom: 4px;
+	left: 0;
+	background: linear-gradient(90deg, #667eea, #764ba2);
+	transition: width 0.3s ease;
+}
+
+#nav button.dark-mode-toggle:hover::after {
+	width: 100%;
+}
+
 #nav button.dark-mode-toggle i {
-	display: inline-block;
-	width: 2.25rem;
-	height: 2.25rem;
+	display: block;
+	width: 100%;
+	height: 100%;
 	line-height: 2.25rem;
 	text-align: center;
 	font-size: 1.25rem;
+	font-style: normal;
 	color: #ffffff;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		text-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #nav button.dark-mode-toggle:hover i {
@@ -885,6 +923,72 @@ header.major > .date:after {
 	background-clip: text;
 	font-size: 2.5rem;
 	font-weight: 700;
+}
+
+.hero-lead {
+	max-width: 36rem;
+	margin: 0 auto 0.5rem;
+	font-size: 1.05rem;
+	line-height: 1.6;
+	opacity: 0.9;
+}
+
+.hero-actions {
+	margin-top: 1.5rem;
+}
+
+.button.secondary {
+	background: transparent;
+	box-shadow: inset 0 0 0 2px rgba(102, 126, 234, 0.55);
+	color: #5a67d8 !important;
+}
+
+.button.secondary:hover {
+	background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+	color: #ffffff !important;
+}
+
+.project-tags {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0 0 1.5rem;
+	padding: 0;
+}
+
+.project-tags li {
+	font-size: 0.75rem;
+	font-weight: 600;
+	letter-spacing: 0.02em;
+	padding: 0.35rem 0.75rem;
+	border-radius: 8px;
+	background: rgba(102, 126, 234, 0.12);
+	color: #5a67d8;
+}
+
+.about-section-title {
+	font-size: 1.15rem;
+	font-weight: 700;
+	margin: 2rem 0 1rem;
+	letter-spacing: -0.02em;
+}
+
+.about-highlights {
+	margin: 0 0 1.5rem;
+	padding-left: 1.25rem;
+}
+
+.about-highlights li {
+	margin-bottom: 0.75rem;
+	line-height: 1.55;
+}
+
+.about-skills {
+	justify-content: flex-start;
+	margin-bottom: 2rem;
 }
 
 #main > .posts {
@@ -1114,6 +1218,26 @@ header.major > .date:after {
 .dark-mode input[type="button"]:hover {
 	background: linear-gradient(135deg, #7c8ef5 0%, #8b5fbf 100%) !important;
 	box-shadow: 0 8px 25px rgba(102, 126, 234, 0.5);
+}
+
+.dark-mode .button.secondary {
+	background: transparent !important;
+	box-shadow: inset 0 0 0 2px rgba(124, 142, 245, 0.65) !important;
+	color: #a3b1f7 !important;
+}
+
+.dark-mode .button.secondary:hover {
+	background: linear-gradient(135deg, #7c8ef5 0%, #8b5fbf 100%) !important;
+	color: #ffffff !important;
+}
+
+.dark-mode .project-tags li {
+	background: rgba(102, 126, 234, 0.22);
+	color: #a3b1f7;
+}
+
+.dark-mode .hero-lead {
+	color: var(--text-secondary);
 }
 
 .dark-mode input[type="text"],
