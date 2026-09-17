@@ -8,20 +8,13 @@ import { APP_CONFIG } from './config/constants';
 function App() {
   const [currentPage, setCurrentPage] = useState(APP_CONFIG.defaultPage);
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check localStorage for saved preference, default to light mode
     const saved = localStorage.getItem('darkMode');
     return saved ? JSON.parse(saved) : false;
   });
 
   useEffect(() => {
-    // Save preference to localStorage
     localStorage.setItem('darkMode', JSON.stringify(isDarkMode));
-    // Apply dark mode class to body/html
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark-mode');
-    } else {
-      document.documentElement.classList.remove('dark-mode');
-    }
+    document.documentElement.classList.toggle('dark-mode', isDarkMode);
   }, [isDarkMode]);
 
   const toggleDarkMode = () => {
@@ -29,11 +22,9 @@ function App() {
   };
 
   return (
-    <div id="wrapper" className={`fade-in ${isDarkMode ? 'dark-mode' : ''}`}>
-      <div className="bg" aria-hidden="true"></div>
-      {/* Skip to main content link for screen readers */}
-      <a 
-        href="#main" 
+    <div id="wrapper" className={isDarkMode ? 'dark-mode' : ''}>
+      <a
+        href="#main"
         className="skip-to-main"
         onFocus={(e) => {
           e.target.style.left = '0';
@@ -45,18 +36,20 @@ function App() {
         Skip to main content
       </a>
       <ErrorBoundary>
-        <Header currentPage={currentPage} setCurrentPage={setCurrentPage} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+        <Header
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          isDarkMode={isDarkMode}
+          toggleDarkMode={toggleDarkMode}
+        />
         <MainContent
           currentPage={currentPage}
-          isDarkMode={isDarkMode}
           setCurrentPage={setCurrentPage}
         />
       </ErrorBoundary>
-      
-      {/* Copyright */}
-      <div id="copyright">
-        <ul><li>&copy; {new Date().getFullYear()} Justin Sowden</li></ul>
-      </div>
+      <footer id="copyright">
+        <p>&copy; {new Date().getFullYear()} Justin Sowden</p>
+      </footer>
     </div>
   );
 }

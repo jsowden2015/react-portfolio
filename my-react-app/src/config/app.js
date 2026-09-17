@@ -28,5 +28,5 @@ export const APP_CONFIG = {
     defaultPage: PAGE_KEYS.PORTFOLIO,
     defaultTheme: 'light',
     loadingDuration: 2000,
-    fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+    fontFamily: '"Figtree", "Segoe UI", system-ui, sans-serif'
 };

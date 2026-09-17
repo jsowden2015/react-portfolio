@@ -16,35 +16,70 @@ export const CONTACT_INFO = [
     }
 ];
 
+export const HERO = {
+    kicker: 'Software Developer II · Mountain View, CA',
+    name: 'Justin Sowden',
+    role: 'Interface-minded full-stack developer',
+    lead:
+        'I design and ship production UI in Angular and React. Google UX certified, ' +
+        'with a two-year Angular v11→v22 migration that landed with zero user-facing downtime.',
+    cta: 'Get in touch'
+};
+
 export const ABOUT = {
-    headline: 'Software Developer II @ Eliassen Group (Remote) | BS | Mountain View, CA',
+    kicker: 'Software Developer II · Mountain View, CA',
+    title: 'About',
+    lede: 'I care about how interfaces feel in production — clarity, consistency, and systems that age well.',
     summary:
-        'Full Stack Developer with 5+ years building and maintaining production web applications ' +
-        'in Angular (v11–v22) and Java 17 (Spring Boot). Owned a two-year migration across eleven ' +
-        'major Angular releases; built RESTful APIs, Jenkins CI/CD pipelines, and automated test ' +
-        'suites with JUnit 5, Selenium, and Cucumber. Mentors junior developers through code ' +
-        'review and introduced AI-assisted development tooling to the team\'s workflow.',
+        'Full-stack developer with 5+ years shipping Angular and Java web apps. I own long-lived ' +
+        'UI surfaces end to end: component systems, accessibility, and the APIs and pipelines ' +
+        'behind them. Google UX Design certified.',
+    experience: {
+        role: 'Software Developer II',
+        org: 'Eliassen Group',
+        detail: 'Remote · Angular (v11–v22), TypeScript, Java 17 / Spring Boot'
+    },
     highlights: [
-        'Led Angular v11→v22 modernization across eleven major releases with zero user-facing downtime',
-        'Architected reusable Angular components and shared services that accelerated enterprise feature delivery',
-        'Designed and built Java 17 / Spring Boot REST APIs and Jenkins CI/CD pipelines',
-        'Automated testing with JUnit 5, Selenium, and Cucumber; Google UX Design certified',
-        'Mentored juniors and introduced AI-assisted tooling (Cursor, Claude Code) into the team workflow'
+        {
+            title: 'Angular modernization',
+            detail:
+                'Led a two-year v11→v22 migration across eleven major releases with zero user-facing downtime.'
+        },
+        {
+            title: 'Shared UI systems',
+            detail:
+                'Built reusable Angular components and services that sped up enterprise feature delivery.'
+        },
+        {
+            title: 'Platform & quality',
+            detail:
+                'Designed Spring Boot REST APIs, Jenkins CI/CD, and automated suites with JUnit 5, Selenium, and Cucumber.'
+        },
+        {
+            title: 'Mentorship & tooling',
+            detail:
+                'Mentored juniors through code review and introduced AI-assisted development into the team workflow.'
+        }
     ],
-    skills: [
-        'Angular (v11–v22)',
-        'TypeScript',
-        'Java 17',
-        'Spring Boot',
-        'RxJS',
-        'Jenkins',
-        'Docker',
-        'MySQL',
-        'JUnit 5',
-        'Selenium',
-        'Cucumber',
-        'Git'
+    skillGroups: [
+        {
+            label: 'Interface',
+            skills: ['Angular (v11–v22)', 'React', 'TypeScript', 'RxJS', 'Figma', 'UX research']
+        },
+        {
+            label: 'Platform',
+            skills: ['Java 17', 'Spring Boot', 'MySQL', 'Docker', 'Jenkins', 'Git']
+        },
+        {
+            label: 'Quality',
+            skills: ['JUnit 5', 'Selenium', 'Cucumber', 'Accessibility', 'Design systems']
+        }
     ]
+};
+
+export const CONTACT = {
+    title: 'Get in touch',
+    lede: 'Available for remote roles and selected freelance. I read every message.'
 };
 
 export const PORTFOLIO_PROJECTS = [
@@ -55,10 +90,7 @@ export const PORTFOLIO_PROJECTS = [
         imageAlt:
             'JustShare dashboard showing file management, storage usage, and premium upsell UI',
         description:
-            'A modern file sharing application built with React, TypeScript, and Vite. ' +
-            'Demonstrates growth engineering principles, monetization strategies, and full-stack ' +
-            'development skills. Features include sign-up flow, trial conversion, dashboard with ' +
-            'file management, storage tracking, and premium upsell flow.',
+            'React + TypeScript file sharing product with signup, storage tracking, and a premium upsell path.',
         tags: ['React', 'TypeScript', 'Vite'],
         repoUrl: 'https://github.com/jsowden2015/JustShare'
     },
@@ -68,12 +100,13 @@ export const PORTFOLIO_PROJECTS = [
         image: 'images/parkpay-mobile-app.jpg',
         imageAlt:
             'ParkPay mobile and desktop mockups for a four-step parking ticket payment flow',
+        outcome:
+            'Google UX Certification project — a four-step parking ticket payment flow across iOS and responsive web.',
         description:
-            'A comprehensive UX/UI design project for Google UX Certification. Multi-platform ' +
-            'parking ticket payment application with iOS mobile app and responsive desktop web app. ' +
-            'Features streamlined four-step process (lookup, review, payment, confirmation) with ' +
-            'progress indicators, plus complete design system and design documentation.',
+            'Research through high-fidelity UI: ticket lookup, review, payment, and confirmation, with progress ' +
+            'indicators and a documented design system for mobile and desktop.',
         tags: ['Figma', 'UX Research', 'Design System'],
+        featured: true,
         repoUrl: 'https://github.com/jsowden2015/Parkingticketpaymentdesign'
     },
     {
@@ -83,9 +116,7 @@ export const PORTFOLIO_PROJECTS = [
         imageAlt:
             'JustStream streaming dashboard with content rows and video browsing UI',
         description:
-            'A modern, full-featured streaming service dashboard built with React, TypeScript, ' +
-            'and Redux Toolkit. Features infinite scrolling, lazy loading, video player ' +
-            'integration, code splitting, error handling, and CI/CD pipeline setup.',
+            'Streaming dashboard with infinite scroll, lazy loading, video playback, and code-split routes.',
         tags: ['React', 'TypeScript', 'Redux Toolkit'],
         repoUrl: 'https://github.com/jsowden2015/JustStream'
     },
@@ -96,11 +127,7 @@ export const PORTFOLIO_PROJECTS = [
         imageAlt:
             'JustChat Discord-style interface with channels, messages, and member presence',
         description:
-            'A modern, real-time chat application built with React, Firebase, and Redux. ' +
-            'Features real-time messaging with typing indicators and reactions, Google ' +
-            'authentication, rich messaging (images, emojis, mentions, message editing), ' +
-            'voice channels with mic controls, member presence tracking, and browser ' +
-            'notifications. Discord-inspired UI built for learning and portfolio demonstration.',
+            'Real-time chat with channels, presence, reactions, and Google auth — built on React and Firebase.',
         tags: ['React', 'Firebase', 'Redux'],
         repoUrl: 'https://github.com/jsowden2015/react-firebase-chat-demo'
     }

@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, featured = false }) => {
   const titleLines = project.title.split('\n');
   const hasActions = Boolean(project.repoUrl || project.demoUrl);
+  const categoryLabel = featured ? `Featured · ${project.date}` : project.date;
 
   return (
-    <article>
+    <article className={`project-card${featured ? ' project-card--featured' : ''}`}>
       <header>
-        <span className="date" aria-label={`Project category: ${project.date}`}>
-          {project.date}
+        <span className="date" aria-label={`Project category: ${categoryLabel}`}>
+          {categoryLabel}
         </span>
         <h2>
           {titleLines.map((line, i) => (
@@ -27,7 +28,8 @@ const ProjectCard = ({ project }) => {
           loading="lazy"
         />
       </div>
-      <p>{project.description}</p>
+      {project.outcome && <p className="project-outcome">{project.outcome}</p>}
+      <p className="project-description">{project.description}</p>
       {project.tags?.length > 0 && (
         <ul className="project-tags" aria-label="Technologies used">
           {project.tags.map((tag) => (
@@ -36,7 +38,7 @@ const ProjectCard = ({ project }) => {
         </ul>
       )}
       {hasActions && (
-        <ul className="actions special">
+        <ul className="actions">
           {project.demoUrl && (
             <li>
               <a
@@ -70,15 +72,18 @@ const ProjectCard = ({ project }) => {
 };
 
 ProjectCard.propTypes = {
+  featured: PropTypes.bool,
   project: PropTypes.shape({
     date: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     imageAlt: PropTypes.string,
+    outcome: PropTypes.string,
     description: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string),
     repoUrl: PropTypes.string,
-    demoUrl: PropTypes.string
+    demoUrl: PropTypes.string,
+    featured: PropTypes.bool
   }).isRequired
 };
 

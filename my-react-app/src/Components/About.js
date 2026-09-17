@@ -2,44 +2,68 @@ import React from 'react';
 import { ABOUT, SOCIAL_LINKS } from '../config/constants';
 
 const About = () => {
-  const linkedInLink = SOCIAL_LINKS.find((link) => link.icon === 'fa-linkedin');
-  const LINKEDIN_URL = linkedInLink
-    ? linkedInLink.href
-    : 'https://www.linkedin.com/in/justin-sowden-361005184/';
+  const linkedInUrl =
+    SOCIAL_LINKS.find((link) => link.icon === 'fa-linkedin')?.href ||
+    'https://www.linkedin.com/in/justin-sowden-361005184/';
 
   return (
-    <article className="post about">
-      <header className="major">
-        <h2 className="name-gradient">About Justin Sowden</h2>
-        <p>{ABOUT.headline}</p>
+    <article className="about">
+      <header className="page-header">
+        <p className="page-kicker">{ABOUT.kicker}</p>
+        <h1>{ABOUT.title}</h1>
+        <p className="page-lede">{ABOUT.lede}</p>
       </header>
 
-      <p>{ABOUT.summary}</p>
+      <p className="about-summary">{ABOUT.summary}</p>
 
-      <h3 className="about-section-title">Highlights</h3>
-      <ul className="about-highlights">
-        {ABOUT.highlights.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
+      <section className="about-block" aria-labelledby="about-experience">
+        <h2 id="about-experience" className="about-section-title">
+          Experience
+        </h2>
+        <div className="about-role">
+          <p className="about-role-title">
+            {ABOUT.experience.role}
+            <span className="about-role-org"> · {ABOUT.experience.org}</span>
+          </p>
+          <p className="about-role-detail">{ABOUT.experience.detail}</p>
+        </div>
+        <ul className="about-highlights">
+          {ABOUT.highlights.map((item) => (
+            <li key={item.title}>
+              <strong>{item.title}</strong>
+              <span>{item.detail}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <h3 className="about-section-title">Technical skills</h3>
-      <ul className="project-tags about-skills" aria-label="Technical skills">
-        {ABOUT.skills.map((skill) => (
-          <li key={skill}>{skill}</li>
-        ))}
-      </ul>
+      <section className="about-block" aria-labelledby="about-skills">
+        <h2 id="about-skills" className="about-section-title">
+          Skills
+        </h2>
+        <div className="about-skill-groups">
+          {ABOUT.skillGroups.map((group) => (
+            <div key={group.label} className="about-skill-group">
+              <h3>{group.label}</h3>
+              <ul className="project-tags" aria-label={`${group.label} skills`}>
+                {group.skills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
 
-      <p>
-        For more information about my experience, education, and professional background, please
-        visit my{' '}
+      <p className="about-footer">
+        Full history on{' '}
         <a
-          href={LINKEDIN_URL}
+          href={linkedInUrl}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Visit Justin Sowden's LinkedIn profile (opens in new tab)"
         >
-          LinkedIn profile
+          LinkedIn
         </a>
         .
       </p>

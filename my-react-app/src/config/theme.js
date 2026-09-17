@@ -1,42 +1,36 @@
 /**
- * Theme and animation configuration.
+ * Theme tokens. Keep in sync with CSS custom properties in App.css.
  */
 
+const LIGHT = {
+    primary: '#0e5c4d',
+    secondary: '#0a463b',
+    background: '#f4f1ea',
+    surface: '#fbf9f4',
+    text: '#1c1916',
+    textLight: '#f7f4ec',
+    shadow: 'none',
+    border: '#ddd6c8'
+};
+
+const DARK = {
+    primary: '#6dbaa6',
+    secondary: '#8dcebd',
+    background: '#141311',
+    surface: '#1c1b18',
+    text: '#f3efe6',
+    textLight: '#141311',
+    shadow: 'none',
+    border: '#2e2c27'
+};
+
 export const THEMES = {
-    light: {
-        primary: '#667eea',
-        secondary: '#764ba2',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        surface: 'rgba(255, 255, 255, 0.95)',
-        text: '#2c3e50',
-        textLight: '#ffffff',
-        shadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
-        border: 'rgba(255, 255, 255, 0.2)'
-    },
-    dark: {
-        primary: '#667eea',
-        secondary: '#764ba2',
-        background: 'linear-gradient(135deg, #1a202c 0%, #2d3748 100%)',
-        surface: 'rgba(26, 32, 44, 0.95)',
-        text: '#f7fafc',
-        textLight: '#ffffff',
-        shadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-        border: 'rgba(255, 255, 255, 0.15)'
-    }
+    light: LIGHT,
+    dark: DARK
 };
 
 export const ANIMATIONS = {
-    fadeIn: {
-        opacity: 0,
-        transform: 'translateY(20px)',
-        animation: 'fadeInUp 0.8s ease-out forwards'
-    },
-    slideIn: {
-        opacity: 0,
-        transform: 'translateX(-30px)',
-        animation: 'slideInLeft 0.6s ease-out forwards'
-    },
-    pulse: {
-        animation: 'pulse 2s infinite'
-    }
+    fadeIn: {},
+    slideIn: {},
+    pulse: {}
 };

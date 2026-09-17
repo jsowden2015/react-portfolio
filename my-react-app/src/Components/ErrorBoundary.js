@@ -33,17 +33,9 @@ class ErrorBoundary extends React.Component {
                         Sorry for the inconvenience. Please refresh the page or try again in a moment.
                     </p>
                     <button
+                        type="button"
+                        className="button"
                         onClick={() => window.location.reload()}
-                        style={{
-                            padding: '0.75rem 1.5rem',
-                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                            color: '#ffffff',
-                            border: 'none',
-                            borderRadius: '8px',
-                            cursor: 'pointer',
-                            fontSize: '1rem',
-                            fontWeight: 600
-                        }}
                     >
                         Reload page
                     </button>
