@@ -52,6 +52,8 @@ export const PORTFOLIO_PROJECTS = [
         date: 'Web Development',
         title: 'JustShare\nFile Sharing Platform',
         image: 'images/just-share.jpg',
+        imageAlt:
+            'JustShare dashboard showing file management, storage usage, and premium upsell UI',
         description:
             'A modern file sharing application built with React, TypeScript, and Vite. ' +
             'Demonstrates growth engineering principles, monetization strategies, and full-stack ' +
@@ -64,6 +66,8 @@ export const PORTFOLIO_PROJECTS = [
         date: 'UI/UX Design',
         title: 'ParkPay\nParking Payment App',
         image: 'images/parkpay-mobile-app.jpg',
+        imageAlt:
+            'ParkPay mobile and desktop mockups for a four-step parking ticket payment flow',
         description:
             'A comprehensive UX/UI design project for Google UX Certification. Multi-platform ' +
             'parking ticket payment application with iOS mobile app and responsive desktop web app. ' +
@@ -76,6 +80,8 @@ export const PORTFOLIO_PROJECTS = [
         date: 'Frontend Development',
         title: 'JustStream\nWebApp',
         image: 'images/just-stream.jpg',
+        imageAlt:
+            'JustStream streaming dashboard with content rows and video browsing UI',
         description:
             'A modern, full-featured streaming service dashboard built with React, TypeScript, ' +
             'and Redux Toolkit. Features infinite scrolling, lazy loading, video player ' +
@@ -87,6 +93,8 @@ export const PORTFOLIO_PROJECTS = [
         date: 'Full Stack Development',
         title: 'JustChat\nApplication',
         image: 'images/just-chat.jpg',
+        imageAlt:
+            'JustChat Discord-style interface with channels, messages, and member presence',
         description:
             'A modern, real-time chat application built with React, Firebase, and Redux. ' +
             'Features real-time messaging with typing indicators and reactions, Google ' +

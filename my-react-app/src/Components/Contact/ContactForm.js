@@ -73,7 +73,13 @@ const ContactForm = ({ theme, animations }) => {
             setFormData({ name: '', email: '', message: '' });
         } catch (error) {
             console.error('EmailJS error:', error);
-            showNotification('Sorry, there was an error sending your message. Please try again later.', 'error');
+            const detail = error?.text || error?.message;
+            showNotification(
+                detail
+                    ? `Sorry, there was an error sending your message: ${detail}`
+                    : 'Sorry, there was an error sending your message. Please try again later.',
+                'error'
+            );
         } finally {
             setIsSubmitting(false);
         }

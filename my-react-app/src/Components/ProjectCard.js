@@ -23,7 +23,7 @@ const ProjectCard = ({ project }) => {
       <div className="image fit">
         <img
           src={`${process.env.PUBLIC_URL}/${project.image}`}
-          alt=""
+          alt={project.imageAlt || project.title.replace(/\n/g, ' ')}
           loading="lazy"
         />
       </div>
@@ -74,6 +74,7 @@ ProjectCard.propTypes = {
     date: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
+    imageAlt: PropTypes.string,
     description: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string),
     repoUrl: PropTypes.string,

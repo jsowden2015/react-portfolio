@@ -994,10 +994,22 @@ header.major > .date:after {
 #main > .posts {
 	display: flex;
 	flex-wrap: wrap;
-	align-items: stretch;
+	align-items: flex-start;
 	text-align: center;
 	width: 100%;
 	padding: 0;
+}
+
+#main > .posts > article .image.fit {
+	aspect-ratio: 16 / 10;
+	margin: 1.5rem 0;
+}
+
+#main > .posts > article .image.fit img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top center;
 }
 
 #main > .posts > * {
