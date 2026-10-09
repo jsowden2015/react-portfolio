@@ -56,7 +56,7 @@ const Header = ({ currentPage, setCurrentPage, isDarkMode, toggleDarkMode }) => 
     <header id="header" className="site-header" role="banner">
       <div className="site-header-inner">
         <a
-          href="#main"
+          href={`#${PAGE_KEYS.PORTFOLIO}`}
           className="logo"
           aria-label="Justin Sowden - Home"
           onClick={handleLogoClick}
