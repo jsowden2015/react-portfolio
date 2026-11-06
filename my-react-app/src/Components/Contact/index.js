@@ -1,8 +1,9 @@
 import React from 'react';
-import ContactForm from './ContactForm';
 import ContactInfo from './ContactInfo';
 import SocialLinks from './SocialLinks';
-import { CONTACT, CONTACT_INFO } from '../../config/constants';
+import { CONTACT, CONTACT_INFO, SOCIAL_LINKS } from '../../config/constants';
+
+const LINKEDIN = SOCIAL_LINKS.find((link) => link.label === 'LinkedIn');
 
 const Contact = () => {
   return (
@@ -13,9 +14,19 @@ const Contact = () => {
       </header>
 
       <div className="contact-layout">
-        <section className="contact-form-panel" aria-labelledby="contact-form-heading">
-          <h2 id="contact-form-heading">Send a message</h2>
-          <ContactForm />
+        <section className="contact-panel" aria-labelledby="contact-linkedin-heading">
+          <h2 id="contact-linkedin-heading">Message me on LinkedIn</h2>
+          <p>Send a note there and I will reply on LinkedIn.</p>
+          {LINKEDIN && (
+            <a
+              className="button"
+              href={LINKEDIN.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Message on LinkedIn
+            </a>
+          )}
         </section>
 
         <aside className="contact-aside" aria-label="Direct contact">

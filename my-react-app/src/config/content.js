@@ -2,17 +2,10 @@
  * Static content: contact info, about copy, and portfolio projects.
  */
 
-export const CONTACT_EMAIL = 'justinpsowden@gmail.com';
-
 export const CONTACT_INFO = [
     {
         title: 'Location',
         content: 'Mountain View, CA'
-    },
-    {
-        title: 'Email',
-        content: CONTACT_EMAIL,
-        isLink: true
     }
 ];
 
@@ -79,7 +72,7 @@ export const ABOUT = {
 
 export const CONTACT = {
     title: 'Get in touch',
-    lede: 'Available for remote roles and selected freelance. I read every message.'
+    lede: 'Available for remote roles and selected freelance. LinkedIn is the best way to reach me.'
 };
 
 export const PORTFOLIO_PROJECTS = [

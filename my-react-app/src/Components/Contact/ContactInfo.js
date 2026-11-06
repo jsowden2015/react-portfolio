@@ -5,7 +5,6 @@ const ContactInfo = ({ title, content, isLink = false }) => {
   const getHref = () => {
     if (!isLink) return undefined;
     if (title === 'Phone') return `tel:${content}`;
-    if (title === 'Email') return `mailto:${content}`;
     return undefined;
   };
 
